@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://odiks8kysapw"]
+
+[ext_resource type="Texture2D" uid="uid://bswxuaj2galh8" path="res://assets/sprites/fruit.png" id="1_48wx6"]
+[ext_resource type="Script" path="res://scripts/fruit.gd" id="1_revky"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k6pfo"]
+radius = 5.0
+
+[node name="Fruit" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_revky")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_48wx6")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_k6pfo")
+
+[node name="Raycasts" type="Node" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 2)
+target_position = Vector2(7, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 2)
+target_position = Vector2(-7, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

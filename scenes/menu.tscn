@@ -1,0 +1,338 @@
+[gd_scene load_steps=28 format=3 uid="uid://c8l57p4xtn6r3"]
+
+[ext_resource type="Texture2D" uid="uid://bh7w410kg7ehy" path="res://assets/sprites/menu_pattern.svg" id="1_ll8ro"]
+[ext_resource type="FontFile" uid="uid://cc5jdlwu6vv8h" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_r20v7"]
+[ext_resource type="Texture2D" uid="uid://7ch5cf1ge5xn" path="res://assets/sprites/world_tileset.png" id="2_y88bk"]
+[ext_resource type="Texture2D" uid="uid://ctbur6lem3seu" path="res://assets/sprites/shadow.png" id="3_f3fgt"]
+[ext_resource type="Script" path="res://scripts/AnimatedTextureRect.gd" id="4_i7wn8"]
+[ext_resource type="Texture2D" uid="uid://d4mc5u5wxih8c" path="res://assets/sprites/knight.png" id="4_m0x2l"]
+[ext_resource type="Texture2D" uid="uid://4h1kb5wy7g8h" path="res://assets/sprites/Lucid V1.2/PNG/Shadow/64/Double-Chevron-Arrow-Right.png" id="7_43hly"]
+[ext_resource type="PackedScene" uid="uid://nrpsarafaeoq" path="res://scenes/menu_button.tscn" id="7_ke631"]
+[ext_resource type="Texture2D" uid="uid://bhnajhmb75xlu" path="res://assets/sprites/Lucid V1.2/PNG/Shadow/64/Gear.png" id="8_bosrs"]
+[ext_resource type="Texture2D" uid="uid://co0r7h8agr1mw" path="res://assets/sprites/Lucid V1.2/PNG/Shadow/64/Home.png" id="9_ueg3a"]
+
+[sub_resource type="Gradient" id="Gradient_t5nbw"]
+colors = PackedColorArray(0.0823529, 0.756863, 0.976471, 1, 0.839216, 0.235294, 0.862745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l4w7y"]
+gradient = SubResource("Gradient_t5nbw")
+use_hdr = true
+
+[sub_resource type="Animation" id="Animation_t3v3f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pattern:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-44, -57)]
+}
+
+[sub_resource type="Animation" id="Animation_6vv5c"]
+resource_name = "scroll"
+length = 20.0
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pattern:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-44, -57), Vector2(-1297, -558)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5rsyb"]
+_data = {
+"RESET": SubResource("Animation_t3v3f"),
+"scroll": SubResource("Animation_6vv5c")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtwvc"]
+atlas = ExtResource("2_y88bk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87t0e"]
+atlas = ExtResource("4_m0x2l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8onyi"]
+atlas = ExtResource("4_m0x2l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8en88"]
+atlas = ExtResource("4_m0x2l")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsbum"]
+atlas = ExtResource("4_m0x2l")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g72ql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8onyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87t0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8en88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsbum")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rapwf"]
+font = ExtResource("2_r20v7")
+font_size = 100
+font_color = Color(1, 0.611765, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ftt7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeb8i"]
+content_margin_left = 20.0
+bg_color = Color(0.941176, 0.764706, 0.341176, 1)
+border_width_bottom = 6
+border_color = Color(0.859991, 0.6813, 0.228035, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_size = 6
+shadow_offset = Vector2(-3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io2ew"]
+content_margin_left = 20.0
+bg_color = Color(0.922119, 0.838508, 0.737294, 1)
+border_width_bottom = 6
+border_color = Color(0.8, 0.661333, 0.48, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_size = 6
+shadow_offset = Vector2(-3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7aqxm"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+bg_color = Color(0.941176, 0.764706, 0.341176, 1)
+border_width_top = 6
+border_color = Color(0.858824, 0.682353, 0.227451, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.156863)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="Theme" id="Theme_t3f3m"]
+Button/colors/font_color = Color(0.352941, 0.196078, 0, 1)
+Button/colors/font_focus_color = Color(0.352941, 0.196078, 0, 1)
+Button/font_sizes/font_size = 40
+Button/styles/focus = SubResource("StyleBoxEmpty_1ftt7")
+Button/styles/hover = SubResource("StyleBoxFlat_oeb8i")
+Button/styles/normal = SubResource("StyleBoxFlat_io2ew")
+Button/styles/pressed = SubResource("StyleBoxFlat_7aqxm")
+
+[node name="Menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_l4w7y")
+
+[node name="Pattern" type="TextureRect" parent="CanvasLayer/Control/Background"]
+modulate = Color(0.623529, 0.588235, 0.0156863, 0.0784314)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -57.0
+offset_right = 17756.0
+offset_bottom = 9643.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ll8ro")
+expand_mode = 1
+stretch_mode = 1
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Background"]
+libraries = {
+"": SubResource("AnimationLibrary_5rsyb")
+}
+autoplay = "scroll"
+
+[node name="Sprites" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Platform" type="TextureRect" parent="CanvasLayer/Control/Sprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = -307.0
+offset_right = 488.0
+offset_bottom = 105.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_vtwvc")
+stretch_mode = 4
+
+[node name="Shadow" type="TextureRect" parent="CanvasLayer/Control/Sprites"]
+modulate = Color(0.359069, 0.359069, 0.359069, 1)
+z_index = 5
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = -300.0
+offset_right = 670.0
+offset_bottom = -98.0
+grow_vertical = 0
+texture = ExtResource("3_f3fgt")
+expand_mode = 1
+
+[node name="Shadow2" type="TextureRect" parent="CanvasLayer/Control/Sprites"]
+modulate = Color(0.227451, 0.227451, 0.227451, 0.384314)
+z_index = 5
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 113.0
+offset_top = -257.0
+offset_right = 445.0
+offset_bottom = -138.0
+grow_vertical = 0
+texture = ExtResource("3_f3fgt")
+expand_mode = 1
+
+[node name="Knight" type="TextureRect" parent="CanvasLayer/Control/Sprites"]
+z_index = 5
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -870.0
+offset_right = 709.0
+offset_bottom = -104.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_87t0e")
+stretch_mode = 4
+script = ExtResource("4_i7wn8")
+sprites = SubResource("SpriteFrames_g72ql")
+current_animation = "idle"
+frame_index = 1
+auto_play = true
+playing = true
+
+[node name="Title" type="Label" parent="CanvasLayer/Control"]
+z_index = 5
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -649.0
+offset_top = 24.0
+offset_right = -27.0
+offset_bottom = 283.0
+grow_horizontal = 0
+size_flags_vertical = 1
+text = "Slime Slayer"
+label_settings = SubResource("LabelSettings_rapwf")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Buttons" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_t3f3m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Buttons"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -757.0
+offset_top = -51.0
+offset_right = 14.0
+offset_bottom = 311.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Play" parent="CanvasLayer/Control/Buttons/VBoxContainer" instance=ExtResource("7_ke631")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "PLAY"
+icon = ExtResource("7_43hly")
+onPress = "game"
+
+[node name="Options" parent="CanvasLayer/Control/Buttons/VBoxContainer" instance=ExtResource("7_ke631")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "OPTIONS"
+icon = ExtResource("8_bosrs")
+onPress = "options"
+
+[node name="Exit" parent="CanvasLayer/Control/Buttons/VBoxContainer" instance=ExtResource("7_ke631")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "EXIT"
+icon = ExtResource("9_ueg3a")
+onPress = "exit"

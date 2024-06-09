@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4c62s5vula11"]
+
+[ext_resource type="Script" path="res://scripts/hurtzone.gd" id="1_76qf1"]
+[ext_resource type="AudioStream" uid="uid://b4sw2qx11em46" path="res://assets/sounds/tap.wav" id="2_e4heu"]
+
+[node name="Hurtzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_76qf1")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_e4heu")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

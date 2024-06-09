@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://nrpsarafaeoq"]
+
+[ext_resource type="Script" path="res://scripts/menuButton.gd" id="1_x537t"]
+[ext_resource type="Texture2D" uid="uid://4h1kb5wy7g8h" path="res://assets/sprites/Lucid V1.2/PNG/Shadow/64/Double-Chevron-Arrow-Right.png" id="2_fobxs"]
+[ext_resource type="AudioStream" uid="uid://blkbupuor3dfj" path="res://assets/sounds/coin.wav" id="3_esg3h"]
+[ext_resource type="AudioStream" uid="uid://gn5its43hsjq" path="res://assets/sounds/power_up.wav" id="4_51l2b"]
+
+[sub_resource type="Animation" id="Animation_vxxye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Fill:size_flags_stretch_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_72vwo"]
+resource_name = "expand"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Fill:size_flags_stretch_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.3]
+}
+
+[sub_resource type="Animation" id="Animation_3eakj"]
+resource_name = "fold"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Fill:size_flags_stretch_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0kcfw"]
+_data = {
+"RESET": SubResource("Animation_vxxye"),
+"expand": SubResource("Animation_72vwo"),
+"fold": SubResource("Animation_3eakj")
+}
+
+[node name="Play" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_x537t")
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fill" type="PanelContainer" parent="Container"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "  PLAY"
+icon = ExtResource("2_fobxs")
+alignment = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0kcfw")
+}
+blend_times = [&"expand", &"expand", 0.2, &"expand", &"fold", 0.2, &"fold", &"expand", 0.2, &"fold", &"fold", 0.2]
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_esg3h")
+volume_db = -10.0
+pitch_scale = 4.0
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_51l2b")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[connection signal="mouse_entered" from="Container/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Container/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Container/Button" to="." method="_on_button_pressed"]

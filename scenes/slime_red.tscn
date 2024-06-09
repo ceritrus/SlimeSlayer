@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bx356y00ln2n8"]
+
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_a380i"]
+[ext_resource type="Texture2D" uid="uid://dsbh7akt4irms" path="res://assets/sprites/slime_purple.png" id="2_ouqnm"]
+[ext_resource type="PackedScene" uid="uid://c4c62s5vula11" path="res://scenes/hurtzone.tscn" id="3_luud5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik7cw"]
+atlas = ExtResource("2_ouqnm")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbnqf"]
+atlas = ExtResource("2_ouqnm")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcrbs"]
+atlas = ExtResource("2_ouqnm")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8fls"]
+atlas = ExtResource("2_ouqnm")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ruui7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik7cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbnqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcrbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8fls")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6p038"]
+size = Vector2(10, 14)
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1_a380i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_ruui7")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.763347
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(8, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-8, 0)
+
+[node name="Hurtzone" parent="." instance=ExtResource("3_luud5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtzone"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_6p038")

@@ -1,0 +1,10 @@
+res://scenes/menu.tscn
+res://scenes/block.tscn
+res://scenes/game.tscn
+res://scenes/fruit.tscn
+res://scenes/slime_red.tscn
+res://scenes/slime_green.tscn
+res://scenes/player.tscn
+res://scenes/scene_manager.tscn
+res://scenes/scene_transition_rect.tscn
+res://scenes/menu_button.tscn
